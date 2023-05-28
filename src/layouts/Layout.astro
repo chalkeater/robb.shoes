@@ -1,36 +1,56 @@
 ---
-export interface Props {
-	title: string;
-}
-
-const { title } = Astro.props;
+// Here we can include any JavaScript we need
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description">
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
-<style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
+<style>
+/* Define some styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex: 1 0 auto; /* This ensures that the container takes up all available space */
+}
+
+.sidebar {
+  width: 20%;
+  background: #f8f9fa;
+  padding: 1em;
+}
+
+.main {
+  width: 80%;
+  padding: 1em;
+}
+
+footer {
+  background: #f8f9fa;
+  padding: 1em;
+  text-align: center;
+  flex-shrink: 0; /* This ensures that the footer doesn't shrink and stays at the bottom */
+
+}
 </style>
+
+<div class="container">
+  <nav class="sidebar">
+    <h2>Robb.Shoes</h2>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/portfolio">Portfolio</a></li>
+    </ul>
+  </nav>
+
+  <main class="main">
+    <slot></slot>
+  </main>
+</div>
+
+<footer>
+  Copyright © 2023 Robb.Shoes
+</footer>
